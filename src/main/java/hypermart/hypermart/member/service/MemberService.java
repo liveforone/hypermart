@@ -77,15 +77,6 @@ public class MemberService {
                 .generateToken(authentication);
     }
 
-    @Scheduled(cron = "0 0 23 * * *")
-    @Transactional
-    public void updateAllMemberGrade() {
-        memberRepository.updateGradeToSilver(MemberGrade.SILVER);
-        memberRepository.updateGradeToGold(MemberGrade.GOLD);
-        memberRepository.updateGradeToPlatinum(MemberGrade.PLATINUM);
-        memberRepository.updateGradeToDia(MemberGrade.DIA);
-    }
-
     @Transactional
     public void regiAddress(String address, String email) {
         memberRepository.regiAddress(address, email);
@@ -111,5 +102,14 @@ public class MemberService {
     @Transactional
     public void deleteUser(Long id) {
         memberRepository.deleteById(id);
+    }
+
+    @Scheduled(cron = "0 0 23 * * *")
+    @Transactional
+    public void updateAllMemberGrade() {
+        memberRepository.updateGradeToSilver(MemberGrade.SILVER);
+        memberRepository.updateGradeToGold(MemberGrade.GOLD);
+        memberRepository.updateGradeToPlatinum(MemberGrade.PLATINUM);
+        memberRepository.updateGradeToDia(MemberGrade.DIA);
     }
 }

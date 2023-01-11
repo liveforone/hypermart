@@ -47,7 +47,7 @@ public class MemberService {
                 MemberPassword.encodePassword(memberRequest.getPassword())
         );
 
-        if (Objects.equals(memberRequest.getEmail(), "admin@coffeebank.com")) {
+        if (Objects.equals(memberRequest.getEmail(), "admin@hypermart.com")) {
             memberRequest.setAuth(Role.ADMIN);
             memberRequest.setMemberGrade(MemberGrade.ADMIN);
         }else {

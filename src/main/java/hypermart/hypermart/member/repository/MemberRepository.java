@@ -28,6 +28,10 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("update Member m set m.password = :password where m.id = :id")
     void updatePassword(@Param("id") Long id, @Param("password") String password);
 
+    @Modifying
+    @Query("update Member m set m.orderCount = m.orderCount + 1 where m.email = :email")
+    void updateOrderCount(@Param("email") String email);
+
     @Modifying(clearAutomatically = true)
     @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount >= 15")
     void updateGradeToSilver(@Param("memberGrade") MemberGrade memberGrade);

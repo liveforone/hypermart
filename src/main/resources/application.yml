@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hypermart?serverTimezone=Asia/Seoul
+    username: root
+    password: 159624
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 20MB
+      location: c:\Temp\upload
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.springframework.web: debug
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa

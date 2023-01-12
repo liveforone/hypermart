@@ -41,6 +41,9 @@ public class SecurityConfig {
                                 "/member/login"
                         ).permitAll()
                         .requestMatchers(
+                                "/item/post"
+                        ).hasRole("SELLER")
+                        .requestMatchers(
                                 "/admin/**"
                         ).hasRole("ADMIN")
                         .anyRequest().authenticated()

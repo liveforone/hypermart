@@ -33,18 +33,18 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     void updateOrderCount(@Param("email") String email);
 
     @Modifying(clearAutomatically = true)
-    @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount >= 15")
+    @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount > 14")
     void updateGradeToSilver(@Param("memberGrade") MemberGrade memberGrade);
 
     @Modifying(clearAutomatically = true)
-    @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount >= 30")
+    @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount > 29")
     void updateGradeToGold(@Param("memberGrade") MemberGrade memberGrade);
 
     @Modifying(clearAutomatically = true)
-    @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount >= 60")
+    @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount > 59")
     void updateGradeToPlatinum(@Param("memberGrade") MemberGrade memberGrade);
 
     @Modifying(clearAutomatically = true)
-    @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount >= 120")
+    @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount > 119")
     void updateGradeToDia(@Param("memberGrade") MemberGrade memberGrade);
 }

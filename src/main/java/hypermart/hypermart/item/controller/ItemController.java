@@ -198,4 +198,29 @@ public class ItemController {
 
         return ResponseEntity.ok("재고 업데이트를 성공적으로 완료하였습니다.");
     }
+
+    @DeleteMapping("/item/delete/{id}")
+    public ResponseEntity<?> deleteItem(
+            @PathVariable("id") Long id,
+            Principal principal
+    ) {
+        Item item = itemService.getItemDetail(id);
+
+        if (CommonUtils.isNull(item)) {
+            return ResponseEntity.ok("존재하지 않는 상품입니다.");
+        }
+
+        String email = principal.getName();
+        String writer = item.getWriter().getEmail();
+        if (!Objects.equals(email, writer)) {
+            return ResponseEntity.ok("작성자만 수정할 수 있습니다.");
+        }
+
+        itemService.deleteItem(id);
+        log.info("상품 삭제 성공");
+        uploadFileService.deleteFile(item);
+        log.info("파일 삭제 성공");
+
+        return ResponseEntity.ok("상품을 성공적으로 삭제하였습니다.");
+    }
 }

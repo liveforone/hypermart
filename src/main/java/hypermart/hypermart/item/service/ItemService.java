@@ -61,4 +61,9 @@ public class ItemService {
     public void updateRemaining(int inputRemaining, Long id) {
         itemRepository.updateRemaining(inputRemaining, id);
     }
+
+    @Transactional
+    public void deleteItem(Long id) {
+        itemRepository.deleteById(id);
+    }
 }

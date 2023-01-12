@@ -51,4 +51,14 @@ public class ItemService {
                 ItemMapper.dtoToEntity(itemRequest)
         ).getId();
     }
+
+    @Transactional
+    public void updateContent(String content, Long id) {
+        itemRepository.updateContent(content, id);
+    }
+
+    @Transactional
+    public void updateRemaining(int inputRemaining, Long id) {
+        itemRepository.updateRemaining(inputRemaining, id);
+    }
 }

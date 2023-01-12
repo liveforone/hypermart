@@ -25,6 +25,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequiredArgsConstructor
@@ -121,5 +122,80 @@ public class ItemController {
 
         String url = "/item/" + itemId;
         return CommonUtils.makeResponseEntityForRedirect(url, request);
+    }
+
+    @GetMapping("/item/edit/{id}")
+    public ResponseEntity<?> itemEditPage(
+            @PathVariable("id") Long id,
+            Principal principal
+    ) {
+        Item item = itemService.getItemDetail(id);
+
+        if (CommonUtils.isNull(item)) {
+            return ResponseEntity.ok("존재하지 않는 상품입니다.");
+        }
+
+        String email = principal.getName();
+        String writer = item.getWriter().getEmail();
+        if (!Objects.equals(email, writer)) {
+            return ResponseEntity.ok("작성자만 수정할 수 있습니다.");
+        }
+
+        return ResponseEntity.ok(ItemMapper.entityToDtoDetail(item));
+    }
+
+    @PutMapping("/item/edit/{id}")
+    public ResponseEntity<?> itemEdit(
+            @PathVariable("id") Long id,
+            @RequestPart String content,
+            @RequestPart List<MultipartFile> uploadFile,
+            Principal principal
+    ) throws IOException {
+        Item item = itemService.getItemDetail(id);
+
+        if (CommonUtils.isNull(item)) {
+            return ResponseEntity.ok("존재하지 않는 상품입니다.");
+        }
+
+        String email = principal.getName();
+        String writer = item.getWriter().getEmail();
+        if (!Objects.equals(email, writer)) {
+            return ResponseEntity.ok("작성자만 수정할 수 있습니다.");
+        }
+
+        itemService.updateContent(content, id);
+        log.info("상품 수정 성공");
+
+        if (!CommonUtils.isEmptyMultipartFile(uploadFile)) {
+            uploadFileService.editFile(uploadFile, item);
+            log.info("파일 수정 성공");
+            return ResponseEntity.ok("상품을 성공적으로 수정하였습니다.");
+        }
+
+        return ResponseEntity.ok("상품을 성공적으로 수정하였습니다.");
+    }
+
+    @PutMapping("/item/update-remaining/{id}")
+    public ResponseEntity<?> updateRemaining(
+            @PathVariable("id") Long id,
+            @RequestBody int remaining,
+            Principal principal
+    ) {
+        Item item = itemService.getItemDetail(id);
+
+        if (CommonUtils.isNull(item)) {
+            return ResponseEntity.ok("존재하지 않는 상품입니다.");
+        }
+
+        String email = principal.getName();
+        String writer = item.getWriter().getEmail();
+        if (!Objects.equals(email, writer)) {
+            return ResponseEntity.ok("작성자만 재고를 업데이트 할 수 있습니다.");
+        }
+
+        itemService.updateRemaining(remaining, id);
+        log.info("재고 업데이트 성공");
+
+        return ResponseEntity.ok("재고 업데이트를 성공적으로 완료하였습니다.");
     }
 }

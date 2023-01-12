@@ -17,4 +17,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query("select i from Item i join i.writer where i.category like %:category%")
     Page<Item> searchByCategory(@Param("category") String category, Pageable pageable);
+
+    @Query("select i from Item i join fetch i.writer where i.id = :id")
+    Item findOneById(@Param("id") Long id);
 }

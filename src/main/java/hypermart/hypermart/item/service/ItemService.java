@@ -1,8 +1,11 @@
 package hypermart.hypermart.item.service;
 
+import hypermart.hypermart.item.dto.ItemRequest;
 import hypermart.hypermart.item.dto.ItemResponse;
+import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.repository.ItemRepository;
 import hypermart.hypermart.item.util.ItemMapper;
+import hypermart.hypermart.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final MemberRepository memberRepository;
 
     public Page<ItemResponse> getItems(Pageable pageable) {
         return ItemMapper.entityToDtoPage(
@@ -32,5 +36,19 @@ public class ItemService {
         return ItemMapper.entityToDtoPage(
                 itemRepository.searchByCategory(category, pageable)
         );
+    }
+
+    public Item getItemDetail(Long id) {
+        return itemRepository.findOneById(id);
+    }
+
+    @Transactional
+    public Long savePost(ItemRequest itemRequest, String email) {
+        itemRequest.setWriter(
+                memberRepository.findByEmail(email)
+        );
+        return itemRepository.save(
+                ItemMapper.dtoToEntity(itemRequest)
+        ).getId();
     }
 }

@@ -63,6 +63,11 @@ public class ItemService {
     }
 
     @Transactional
+    public void increaseOneGood(Long id) {
+        itemRepository.plusGood(id);
+    }
+
+    @Transactional
     public void deleteItem(Long id) {
         itemRepository.deleteById(id);
     }

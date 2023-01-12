@@ -216,10 +216,10 @@ public class ItemController {
             return ResponseEntity.ok("작성자만 수정할 수 있습니다.");
         }
 
-        itemService.deleteItem(id);
-        log.info("상품 삭제 성공");
         uploadFileService.deleteFile(item);
         log.info("파일 삭제 성공");
+        itemService.deleteItem(id);
+        log.info("상품 삭제 성공");
 
         return ResponseEntity.ok("상품을 성공적으로 삭제하였습니다.");
     }

@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -35,6 +37,12 @@ public class ItemService {
     public Page<ItemResponse> searchItemsByCategory(String category, Pageable pageable) {
         return ItemMapper.entityToDtoPage(
                 itemRepository.searchByCategory(category, pageable)
+        );
+    }
+
+    public List<ItemResponse> getItemsByWriter(String email) {
+        return ItemMapper.entityToDtoList(
+                itemRepository.findItemsByWriter(email)
         );
     }
 

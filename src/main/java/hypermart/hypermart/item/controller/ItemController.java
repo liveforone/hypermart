@@ -96,6 +96,15 @@ public class ItemController {
         return ResponseEntity.ok(hashMap);
     }
 
+    @GetMapping("/seller-page")
+    public ResponseEntity<List<ItemResponse>> sellerPage(Principal principal) {
+        //상품에 맞는 주문갯수(통계쿼리 sum)
+        String email = principal.getName();
+        List<ItemResponse> items = itemService.getItemsByWriter(email);
+
+        return ResponseEntity.ok(items);
+    }
+
     @GetMapping("/item/post")
     public ResponseEntity<?> itemPostPage() {
         return ResponseEntity.ok("상품 등록 페이지");

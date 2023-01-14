@@ -41,7 +41,8 @@ public class SecurityConfig {
                                 "/member/login"
                         ).permitAll()
                         .requestMatchers(
-                                "/item/post"
+                                "/item/post",
+                                "/seller-page"
                         ).hasRole("SELLER")
                         .requestMatchers(
                                 "/admin/**"

@@ -2,13 +2,10 @@ package hypermart.hypermart.utility;
 
 import hypermart.hypermart.jwt.JwtAuthenticationFilter;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URI;
 import java.util.List;
 
 public class CommonUtils {
@@ -41,18 +38,17 @@ public class CommonUtils {
             String inputUrl,
             HttpServletRequest request
     ) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders httpHeaders = new HttpHeaders();
-
         String url = "http://localhost:8080" + inputUrl;
         String token = JwtAuthenticationFilter.resolveToken(request);
-        httpHeaders.setBearerAuth(token);
 
-        return restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                new HttpEntity<>(httpHeaders),
-                String.class
-        );
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setBearerAuth(token);
+        httpHeaders.setLocation(URI.create(url));
+        httpHeaders.setAccessControlRequestMethod(HttpMethod.GET);
+
+        return ResponseEntity
+                .status(HttpStatus.MOVED_PERMANENTLY)
+                .headers(httpHeaders)
+                .build();
     }
 }

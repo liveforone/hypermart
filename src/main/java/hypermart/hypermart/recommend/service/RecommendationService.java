@@ -20,11 +20,11 @@ public class RecommendationService {
     }
 
     @Transactional
-    public void saveRecommendation(Item item, Member member) {
+    public Long saveRecommendation(Item item, Member member) {
         Recommendation recommendation = new Recommendation();
         recommendation.setItem(item);
         recommendation.setMember(member);
-        recommendationRepository.save(recommendation);
+        return recommendationRepository.save(recommendation).getId();
     }
 
     @Transactional

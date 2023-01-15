@@ -22,7 +22,7 @@ import java.security.Principal;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class RecommendController {
+public class RecommendationController {
 
     private final RecommendationService recommendationService;
     private final ItemService itemService;

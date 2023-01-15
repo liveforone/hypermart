@@ -23,7 +23,7 @@
 ## 팀별 위키
 * [회원팀](https://github.com/liveforone/hypermart/wiki/%ED%9A%8C%EC%9B%90%ED%8C%80)
 * [상품팀](https://github.com/liveforone/hypermart/wiki/%EC%83%81%ED%92%88%ED%8C%80)
-* [추천팀]()
+* [추천팀](https://github.com/liveforone/hypermart/wiki/%EC%B6%94%EC%B2%9C%ED%8C%80)
 * [리뷰팀]() 
 * [주문팀]()
 * [장바구니팀]()
@@ -67,13 +67,7 @@
 * [Jwt 리다이렉트는 어떻게 해야할까?](https://github.com/liveforone/hypermart/wiki/Jwt-%EB%A6%AC%EB%8B%A4%EC%9D%B4%EB%A0%89%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 
 [할일]
-Good {
-private Long id;
-private Member member;
-private Item item;
-}
-추천 시스템 개발
-추천시 상품 good + 1
+리뷰 시스템
 판매자 페이지에 상품별 주문갯수(sum쿼리이용)
 주문시 유저 orderCount + 1
 

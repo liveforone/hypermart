@@ -15,8 +15,9 @@
 * Rest-Api 서버입니다. 결제로직은 분리하였습니다(현 프로젝트에 결제로직은 없습니다).
 * 회사에서 부서를 나누듯 해당 프로젝트도 엔티티별로 부서를 나누어서 작업하였습니다.
 * 부서별(엔티티) 개발 문서는 위키에 기재가 되어있습니다.
-* 위키를 보시면 자세한 알고리즘, 상세 요구사항 등이 기재되어있습니다.
+* 위키를 보시면 자세한 알고리즘, 상세 요구사항, 구현 기술 등이 기재되어있습니다.
 * 해당 프로젝트는 5번 문서에 있는 스타일 가이드를 따라 제작하였고, 해당 스타일 가이드는 모든 부서에 동일하게 적용됩니다.
+* 모든 문서는 위키로 제작하였고, 링크를 달아놓았으니 클릭하셔서 보실 수 있습니다.
 
 # 3. 전체 설계
 ## 팀별 위키
@@ -62,13 +63,19 @@
 * [명시적 프로그래밍](https://github.com/liveforone/study/blob/main/%5B%EB%82%98%EB%A7%8C%EC%9D%98%20%EC%8A%A4%ED%83%80%EC%9D%BC%20%EA%B0%80%EC%9D%B4%EB%93%9C%5D/k.%20%EB%AA%85%EC%8B%9C%EC%A0%81%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.md)
 * [문서화 가이드](https://github.com/liveforone/study/blob/main/%5B%EB%82%98%EB%A7%8C%EC%9D%98%20%EC%8A%A4%ED%83%80%EC%9D%BC%20%EA%B0%80%EC%9D%B4%EB%93%9C%5D/l.%20%EB%AC%B8%EC%84%9C%ED%99%94%20%EA%B0%80%EC%9D%B4%EB%93%9C.md)
 
-[할일]
-추천 시스템 개발
-판매자 페이지에 상품별 주문갯수(sum쿼리이용)
+# 6. 나의 고민
+* [Jwt 리다이렉트는 어떻게 해야할까?](https://github.com/liveforone/hypermart/wiki/Jwt-%EB%A6%AC%EB%8B%A4%EC%9D%B4%EB%A0%89%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 
-    
-주문시 유저 orderCount + 1
+[할일]
+Good {
+private Long id;
+private Member member;
+private Item item;
+}
+추천 시스템 개발
 추천시 상품 good + 1
+판매자 페이지에 상품별 주문갯수(sum쿼리이용)
+주문시 유저 orderCount + 1
 
 [팀 종류]
 회원팀, 상품팀, 추천팀(좋아요), 리뷰팀, 주문팀(주문 + 할인 시스템), 장바구니팀

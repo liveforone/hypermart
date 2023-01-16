@@ -31,4 +31,9 @@ public class RecommendationService {
     public void deleteRecommendation(Recommendation recommendation) {
         recommendationRepository.deleteById(recommendation.getId());
     }
+
+    @Transactional
+    public void deleteRecommendationsByItem(Item item) {
+        recommendationRepository.deleteBulkRecommendationsByItem(item);
+    }
 }

@@ -6,6 +6,7 @@ import hypermart.hypermart.item.dto.ItemResponse;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
 import hypermart.hypermart.item.util.ItemMapper;
+import hypermart.hypermart.recommend.service.RecommendationService;
 import hypermart.hypermart.uploadFile.dto.UploadFileResponse;
 import hypermart.hypermart.uploadFile.service.UploadFileService;
 import hypermart.hypermart.utility.CommonUtils;
@@ -35,6 +36,7 @@ public class ItemController {
     private final ItemService itemService;
     private final UploadFileService uploadFileService;
     private final CommentService commentService;
+    private final RecommendationService recommendationService;
 
     @GetMapping("/item")
     public ResponseEntity<Page<ItemResponse>> itemHome(
@@ -230,6 +232,8 @@ public class ItemController {
         log.info("연관 파일 삭제 성공");
         commentService.deleteCommentsByItem(item);
         log.info("연관 리뷰 삭제 성공");
+        recommendationService.deleteRecommendationsByItem(item);
+        log.info("연관 추천 삭제 성공");
         itemService.deleteItem(id);
         log.info("상품 삭제 성공");
 

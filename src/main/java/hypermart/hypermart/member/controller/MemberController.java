@@ -125,9 +125,7 @@ public class MemberController {
             @RequestBody ChangeEmailRequest changeEmailRequest,
             Principal principal
     ) {
-        String email = principal.getName();
         String requestEmail = changeEmailRequest.getEmail();
-        Member member = memberService.getMemberEntity(email);
         Member requestMember = memberService.getMemberEntity(requestEmail);
 
         if (MemberEmail.isDuplicateEmail(requestMember)) {
@@ -135,6 +133,9 @@ public class MemberController {
             return ResponseEntity
                     .ok("해당 이메일이 이미 존재합니다. 다시 입력해주세요");
         }
+
+        String email = principal.getName();
+        Member member = memberService.getMemberEntity(email);
 
         String inputPw = changeEmailRequest.getPassword();
         String originalPw = member.getPassword();
@@ -208,7 +209,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/prohibition")
-    public ResponseEntity<?> prohibitionPage() {
+    public ResponseEntity<?> prohibition() {
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
                 .body("접근 권한이 없습니다.");

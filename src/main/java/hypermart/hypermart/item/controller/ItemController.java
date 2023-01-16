@@ -229,11 +229,11 @@ public class ItemController {
         }
 
         uploadFileService.deleteFile(item);
-        log.info("연관 파일 삭제 성공");
+        log.info("연관 파일 전체 삭제 성공");
         commentService.deleteCommentsByItem(item);
-        log.info("연관 리뷰 삭제 성공");
+        log.info("연관 리뷰 전체 삭제 성공");
         recommendationService.deleteRecommendationsByItem(item);
-        log.info("연관 추천 삭제 성공");
+        log.info("연관 추천 전체 삭제 성공");
         itemService.deleteItem(id);
         log.info("상품 삭제 성공");
 

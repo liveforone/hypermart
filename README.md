@@ -72,7 +72,23 @@
 * [작성자 판별은 어디서 해야할까?](https://github.com/liveforone/hypermart/wiki/%EC%9E%91%EC%84%B1%EC%9E%90-%ED%8C%90%EB%B3%84%EC%9D%80-%EC%96%B4%EB%94%94%EC%84%9C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 
 [할일]
-주문 만들기
+장바구니팀 만들기(주문보다 먼저)
+
+Orders {
+    private Long id;
+    private Item item;
+    private Member member;
+    private OrderStatus status; //ORDER, CANCEL
+    private int orderCount;
+    private LocalDate createdDate;
+}
+리뷰와 추천에서 주문했는지 체크하는 메서드
+회원 카운트 + 1
+주문 취소
+할인(회원등급, 특가)
+하나의 주문에 여러개의 상품을 담을 순 없다.
+장바구니처럼 여러 상품을 주문시에는 for-each사용해서 다중 연산을 하면된다.
+이는 장바구니도 마찬가지이다.
 판매자 페이지에 상품별 주문갯수(sum쿼리이용)
 주문시 유저 orderCount + 1
 주문이 완성되면, 추천과 리뷰를 save할때 주문한 상품인지(where절로 member, item, state 판별해서 가져오기)

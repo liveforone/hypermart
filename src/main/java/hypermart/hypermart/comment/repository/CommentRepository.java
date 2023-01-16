@@ -14,6 +14,9 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Query("select c from Comment c join fetch c.writer join fetch c.item where c.id = :id")
     Comment findOneById(@Param("id") Long id);
 
+    @Query("select c from Comment c join fetch c.item join fetch c.writer w where w.email = :email")
+    Comment findOneByWriterEmail(@Param("email") String email);
+
     @Query("select c from Comment c join c.writer join c.item where c.item = :item")
     Page<Comment> findCommentsByItem(@Param("item") Item item, Pageable pageable);
 

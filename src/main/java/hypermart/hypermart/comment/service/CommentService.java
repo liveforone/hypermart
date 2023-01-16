@@ -21,8 +21,12 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
 
-    public Comment getCommentDetail(Long id) {
+    public Comment getCommentDetailById(Long id) {
         return commentRepository.findOneById(id);
+    }
+
+    public Comment getCommentDetailByWriterEmail(String email) {
+        return commentRepository.findOneByWriterEmail(email);
     }
 
     public Page<CommentResponse> getCommentsByItem(Item item, Pageable pageable) {

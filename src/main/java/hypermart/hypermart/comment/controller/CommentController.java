@@ -4,6 +4,7 @@ import hypermart.hypermart.comment.dto.CommentRequest;
 import hypermart.hypermart.comment.dto.CommentResponse;
 import hypermart.hypermart.comment.model.Comment;
 import hypermart.hypermart.comment.service.CommentService;
+import hypermart.hypermart.comment.util.CommentUtils;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
 import hypermart.hypermart.utility.CommonUtils;
@@ -67,6 +68,11 @@ public class CommentController {
         }
 
         String email = principal.getName();
+        Comment comment = commentService.getCommentDetailByWriterEmail(email);
+        if (CommentUtils.isDuplicateComment(comment)) {
+            return ResponseEntity.ok("이미 리뷰를 작성하셨습니다.\n리뷰는 한 번만 작성가능합니다.");
+        }
+
         commentService.saveComment(commentRequest, item, email);
         log.info("리뷰 등록 성공");
 
@@ -80,7 +86,7 @@ public class CommentController {
             @RequestBody String content,
             Principal principal
     ) {
-        Comment comment = commentService.getCommentDetail(commentId);
+        Comment comment = commentService.getCommentDetailById(commentId);
         if (CommonUtils.isNull(comment)) {
             return ResponseEntity.ok("존재하지 않는 리뷰입니다.");
         }
@@ -102,7 +108,7 @@ public class CommentController {
             @PathVariable("commentId") Long commentId,
             Principal principal
     ) {
-        Comment comment = commentService.getCommentDetail(commentId);
+        Comment comment = commentService.getCommentDetailById(commentId);
         if (CommonUtils.isNull(comment)) {
             return ResponseEntity.ok("존재하지 않는 리뷰입니다.");
         }

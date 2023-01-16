@@ -26,8 +26,8 @@
 * [상품팀](https://github.com/liveforone/hypermart/wiki/%EC%83%81%ED%92%88%ED%8C%80)
 * [추천팀](https://github.com/liveforone/hypermart/wiki/%EC%B6%94%EC%B2%9C%ED%8C%80)
 * [리뷰팀](https://github.com/liveforone/hypermart/wiki/%EB%A6%AC%EB%B7%B0%ED%8C%80) 
-* [주문팀]()
 * [장바구니팀]()
+* [주문팀]()
 ## 요구사항
 * 회원은 3종류가 존재한다. MEMBER(일반회원), ADMIN(운영자), SELLER(판매자)
 * 일반회원은 등급이 존재하며 등급에 따라 할인 폭이 달라진다.

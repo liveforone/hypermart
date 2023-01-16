@@ -16,7 +16,7 @@ public class RecommendationService {
     private final RecommendationRepository recommendationRepository;
 
     public Recommendation getRecommendationDetail(Item item, Member member) {
-        return recommendationRepository.findOneForDuplicate(member, item);
+        return recommendationRepository.findOneByMemberAndItem(member, item);
     }
 
     @Transactional

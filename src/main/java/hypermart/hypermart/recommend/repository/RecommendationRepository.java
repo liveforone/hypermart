@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 public interface RecommendationRepository extends JpaRepository<Recommendation, Long> {
 
     @Query("select r from Recommendation r join fetch r.member join fetch r.item where r.member = :member and r.item = :item")
-    Recommendation findOneForDuplicate(@Param("member") Member member, @Param("item") Item item);
+    Recommendation findOneByMemberAndItem(@Param("member") Member member, @Param("item") Item item);
 
     @Modifying(clearAutomatically = true)
     @Query("delete from Recommendation r where r.item = :item")

@@ -36,13 +36,13 @@ public class CommentService {
     }
 
     @Transactional
-    public void saveComment(CommentRequest commentRequest, Item item, String email) {
+    public Long saveComment(CommentRequest commentRequest, Item item, String email) {
         commentRequest.setItem(item);
         commentRequest.setWriter(memberRepository.findByEmail(email));
 
-        commentRepository.save(
+        return commentRepository.save(
                 CommentMapper.dtoToEntity(commentRequest)
-        );
+        ).getId();
     }
 
     @Transactional

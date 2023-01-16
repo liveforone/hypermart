@@ -40,7 +40,8 @@ public class RecommendationController {
             return ResponseEntity.ok("존재하지 않는 상품입니다.");
         }
 
-        Member member = memberService.getMemberEntity(principal.getName());
+        String email = principal.getName();
+        Member member = memberService.getMemberEntity(email);
         Recommendation recommendation = recommendationService.getRecommendationDetail(item, member);
         if (RecommendationUtils.isDuplicateRecommendation(recommendation)) {
             return ResponseEntity.ok("이미 추천한 상품입니다.");
@@ -65,7 +66,8 @@ public class RecommendationController {
             return ResponseEntity.ok("존재하지 않는 상품입니다.");
         }
 
-        Member member = memberService.getMemberEntity(principal.getName());
+        String email = principal.getName();
+        Member member = memberService.getMemberEntity(email);
         Recommendation recommendation = recommendationService.getRecommendationDetail(item, member);
         if (!RecommendationUtils.isDuplicateRecommendation(recommendation)) {
             return ResponseEntity.ok("추천하지 않은 상품은 취소가 불가능합니다.");

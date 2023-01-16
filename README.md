@@ -73,6 +73,16 @@
 
 [할일]
 장바구니팀 만들기(주문보다 먼저)
+Basket {
+private Long id;
+private Member member;
+private Item item;
+}
+생성, 삭제(수정 없음)
+페이징 말고 리스트로 가져옴
+장바구니로 주문이 끝나고 나면 삭제하기
+추천처럼 로그성 테이블임.
+
 
 Orders {
     private Long id;

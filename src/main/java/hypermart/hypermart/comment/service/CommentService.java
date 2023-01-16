@@ -2,6 +2,7 @@ package hypermart.hypermart.comment.service;
 
 import hypermart.hypermart.comment.dto.CommentRequest;
 import hypermart.hypermart.comment.dto.CommentResponse;
+import hypermart.hypermart.comment.model.Comment;
 import hypermart.hypermart.comment.repository.CommentRepository;
 import hypermart.hypermart.comment.util.CommentMapper;
 import hypermart.hypermart.item.model.Item;
@@ -19,6 +20,10 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final MemberRepository memberRepository;
+
+    public Comment getCommentDetail(Long id) {
+        return commentRepository.findOneById(id);
+    }
 
     public Page<CommentResponse> getCommentsByItem(Item item, Pageable pageable) {
         return CommentMapper.entityToDtoPage(

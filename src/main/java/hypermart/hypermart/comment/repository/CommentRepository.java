@@ -11,6 +11,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
+    @Query("select c from Comment c join fetch c.writer join fetch c.item where c.id = :id")
+    Comment findOneById(@Param("id") Long id);
+
     @Query("select c from Comment c join c.writer join c.item where c.item = :item")
     Page<Comment> findCommentsByItem(@Param("item") Item item, Pageable pageable);
 

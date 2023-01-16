@@ -29,7 +29,7 @@ public class RecommendationController {
     private final MemberService memberService;
 
     @PostMapping("/recommend/{itemId}")
-    public ResponseEntity<?> recommendationItem(
+    public ResponseEntity<?> recommendItem(
             @PathVariable("itemId") Long itemId,
             Principal principal,
             HttpServletRequest request

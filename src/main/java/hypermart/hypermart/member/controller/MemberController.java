@@ -192,7 +192,7 @@ public class MemberController {
     }
 
     @GetMapping("/admin")
-    public ResponseEntity<?> admin(Principal principal) {
+    public ResponseEntity<?> adminPage(Principal principal) {
         Member member = memberService.getMemberEntity(principal.getName());
 
         if (!member.getAuth().equals(Role.ADMIN)) {
@@ -208,7 +208,7 @@ public class MemberController {
     }
 
     @GetMapping("/member/prohibition")
-    public ResponseEntity<?> prohibition() {
+    public ResponseEntity<?> prohibitionPage() {
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
                 .body("접근 권한이 없습니다.");

@@ -50,7 +50,7 @@ public class ItemController {
     }
 
     @GetMapping("/item/search-title")
-    public ResponseEntity<Page<ItemResponse>> itemTitleSearch(
+    public ResponseEntity<Page<ItemResponse>> itemTitleSearchPage(
             @RequestParam String title,
             @PageableDefault(page = 0, size = 10)
             @SortDefault.SortDefaults({
@@ -64,7 +64,7 @@ public class ItemController {
     }
 
     @GetMapping("/item/search-category")
-    public ResponseEntity<Page<ItemResponse>> itemCategorySearch(
+    public ResponseEntity<Page<ItemResponse>> itemCategorySearchPage(
             @RequestParam String category,
             @PageableDefault(page = 0, size = 10)
             @SortDefault.SortDefaults({
@@ -113,7 +113,7 @@ public class ItemController {
     }
 
     @PostMapping("/item/post")
-    public ResponseEntity<?> itemPost(
+    public ResponseEntity<?> postItem(
             @RequestPart ItemRequest itemRequest,
             @RequestPart List<MultipartFile> uploadFile,
             Principal principal,
@@ -155,7 +155,7 @@ public class ItemController {
     }
 
     @PutMapping("/item/edit/{id}")
-    public ResponseEntity<?> itemEdit(
+    public ResponseEntity<?> editItem(
             @PathVariable("id") Long id,
             @RequestPart String content,
             @RequestPart List<MultipartFile> uploadFile,

@@ -21,7 +21,7 @@
 * 해당 프로젝트는 5번 문서에 있는 스타일 가이드를 따라 제작하였고, 해당 스타일 가이드는 모든 부서에 동일하게 적용됩니다.
 
 # 3. 전체 설계
-## 팀별 위키
+## 팀별 위키(팀별 문서)
 * [회원팀](https://github.com/liveforone/hypermart/wiki/%ED%9A%8C%EC%9B%90%ED%8C%80)
 * [상품팀](https://github.com/liveforone/hypermart/wiki/%EC%83%81%ED%92%88%ED%8C%80)
 * [추천팀](https://github.com/liveforone/hypermart/wiki/%EC%B6%94%EC%B2%9C%ED%8C%80)

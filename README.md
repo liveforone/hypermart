@@ -68,6 +68,8 @@
 
 # 6. 나의 고민
 * [Jwt 리다이렉트는 어떻게 해야할까?](https://github.com/liveforone/hypermart/wiki/Jwt-%EB%A6%AC%EB%8B%A4%EC%9D%B4%EB%A0%89%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
+* [중복체크는 어떻게 해야할까?](https://github.com/liveforone/hypermart/wiki/%EC%A4%91%EB%B3%B5%EC%B2%B4%ED%81%AC%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
+* [작성자 판별은 어디서 해야할까?](https://github.com/liveforone/hypermart/wiki/%EC%9E%91%EC%84%B1%EC%9E%90-%ED%8C%90%EB%B3%84%EC%9D%80-%EC%96%B4%EB%94%94%EC%84%9C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 
 [할일]
 주문 만들기

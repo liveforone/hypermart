@@ -11,7 +11,7 @@ public class OrdersMapper {
         return Orders.builder()
                 .id(ordersRequest.getId())
                 .orderState(ordersRequest.getOrderState())
-                .orderCount(ordersRequest.getOrderCount())
+                .orderQuantity(ordersRequest.getOrderQuantity())
                 .totalPrice(ordersRequest.getTotalPrice())
                 .member(ordersRequest.getMember())
                 .item(ordersRequest.getItem())

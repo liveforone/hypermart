@@ -4,6 +4,8 @@ import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
 import hypermart.hypermart.member.model.Member;
 import hypermart.hypermart.member.service.MemberService;
+import hypermart.hypermart.orders.model.Orders;
+import hypermart.hypermart.orders.service.OrdersService;
 import hypermart.hypermart.recommend.model.Recommendation;
 import hypermart.hypermart.recommend.service.RecommendationService;
 import hypermart.hypermart.recommend.util.RecommendationUtils;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,6 +30,7 @@ public class RecommendationController {
     private final RecommendationService recommendationService;
     private final ItemService itemService;
     private final MemberService memberService;
+    private final OrdersService ordersService;
 
     @PostMapping("/recommend/{itemId}")
     public ResponseEntity<?> recommendItem(
@@ -42,6 +46,11 @@ public class RecommendationController {
 
         String email = principal.getName();
         Member member = memberService.getMemberEntity(email);
+        List<Orders> orders = ordersService.getOrdersByMemberAndItem(member, item);
+        if (CommonUtils.isNull(orders)) {
+            return ResponseEntity.ok("추천은 주문한 상품만 가능합니다.");
+        }
+
         Recommendation recommendation = recommendationService.getRecommendationDetail(item, member);
         if (RecommendationUtils.isDuplicateRecommendation(recommendation)) {
             return ResponseEntity.ok("이미 추천한 상품입니다.");

@@ -7,6 +7,10 @@ import hypermart.hypermart.comment.service.CommentService;
 import hypermart.hypermart.comment.util.CommentUtils;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
+import hypermart.hypermart.member.model.Member;
+import hypermart.hypermart.member.service.MemberService;
+import hypermart.hypermart.orders.model.Orders;
+import hypermart.hypermart.orders.service.OrdersService;
 import hypermart.hypermart.utility.CommonUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -30,6 +35,8 @@ public class CommentController {
 
     private final CommentService commentService;
     private final ItemService itemService;
+    private final MemberService memberService;
+    private final OrdersService ordersService;
 
     @GetMapping("/comment/{itemId}")
     public ResponseEntity<?> commentsPage(
@@ -68,12 +75,18 @@ public class CommentController {
         }
 
         String email = principal.getName();
-        Comment comment = commentService.getCommentDetailByWriterEmail(email);
+        Member member = memberService.getMemberEntity(email);
+        List<Orders> orders = ordersService.getOrdersByMemberAndItem(member, item);
+        if (CommonUtils.isNull(orders)) {
+            return ResponseEntity.ok("리뷰는 주문한 상품만 가능합니다.");
+        }
+
+        Comment comment = commentService.getCommentDetailByWriter(member);
         if (CommentUtils.isDuplicateComment(comment)) {
             return ResponseEntity.ok("이미 리뷰를 작성하셨습니다.\n리뷰는 한 번만 작성가능합니다.");
         }
 
-        commentService.saveComment(commentRequest, item, email);
+        commentService.saveComment(commentRequest, item, member);
         log.info("리뷰 등록 성공");
 
         String url = "/comment/" + itemId;

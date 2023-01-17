@@ -6,7 +6,7 @@ import hypermart.hypermart.comment.model.Comment;
 import hypermart.hypermart.comment.repository.CommentRepository;
 import hypermart.hypermart.comment.util.CommentMapper;
 import hypermart.hypermart.item.model.Item;
-import hypermart.hypermart.member.repository.MemberRepository;
+import hypermart.hypermart.member.model.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,14 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final MemberRepository memberRepository;
 
     public Comment getCommentDetailById(Long id) {
         return commentRepository.findOneById(id);
     }
 
-    public Comment getCommentDetailByWriterEmail(String email) {
-        return commentRepository.findOneByWriterEmail(email);
+    public Comment getCommentDetailByWriter(Member member) {
+        return commentRepository.findOneByWriter(member);
     }
 
     public Page<CommentResponse> getCommentsByItem(Item item, Pageable pageable) {
@@ -36,9 +35,9 @@ public class CommentService {
     }
 
     @Transactional
-    public Long saveComment(CommentRequest commentRequest, Item item, String email) {
+    public Long saveComment(CommentRequest commentRequest, Item item, Member member) {
         commentRequest.setItem(item);
-        commentRequest.setWriter(memberRepository.findByEmail(email));
+        commentRequest.setWriter(member);
 
         return commentRepository.save(
                 CommentMapper.dtoToEntity(commentRequest)

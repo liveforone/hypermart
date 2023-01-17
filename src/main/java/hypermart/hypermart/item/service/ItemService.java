@@ -1,5 +1,6 @@
 package hypermart.hypermart.item.service;
 
+import hypermart.hypermart.basket.model.Basket;
 import hypermart.hypermart.item.dto.ItemRequest;
 import hypermart.hypermart.item.dto.ItemResponse;
 import hypermart.hypermart.item.model.Item;
@@ -68,6 +69,19 @@ public class ItemService {
     @Transactional
     public void updateRemaining(int inputRemaining, Long id) {
         itemRepository.updateRemaining(inputRemaining, id);
+    }
+
+    @Transactional
+    public void minusRemaining(Long id) {
+        itemRepository.minusRemaining(id);
+    }
+
+    @Transactional
+    public void multipleMinusRemaining(List<Basket> baskets) {
+        for (Basket basket : baskets) {
+            Long itemId = basket.getItem().getId();
+            itemRepository.minusRemaining(itemId);
+        }
     }
 
     @Transactional

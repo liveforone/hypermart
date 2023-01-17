@@ -36,8 +36,12 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     void updateRemaining(@Param("remaining") int remaining, @Param("id") Long id);
 
     @Modifying
+    @Query("update Item i set i.remaining = i.remaining - :orderQuantity where i.id = :id")
+    void minusRemaining(@Param("orderQuantity") int orderQuantity, @Param("id") Long id);
+
+    @Modifying
     @Query("update Item i set i.remaining = i.remaining - 1 where i.id = :id")
-    void minusRemaining(@Param("id") Long id);
+    void minusOneRemaining(@Param("id") Long id);
 
     @Modifying
     @Query("update Item i set i.remaining = i.remaining + 1 where i.id = :id")

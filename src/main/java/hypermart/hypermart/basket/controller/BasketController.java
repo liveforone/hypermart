@@ -3,6 +3,7 @@ package hypermart.hypermart.basket.controller;
 import hypermart.hypermart.basket.dto.BasketResponse;
 import hypermart.hypermart.basket.model.Basket;
 import hypermart.hypermart.basket.service.BasketService;
+import hypermart.hypermart.basket.util.BasketMapper;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
 import hypermart.hypermart.utility.CommonUtils;
@@ -27,9 +28,9 @@ public class BasketController {
     @GetMapping("/my-basket")
     public ResponseEntity<List<BasketResponse>> myBasket(Principal principal) {
         String email = principal.getName();
-        List<BasketResponse> baskets = basketService.getBasketsByEmail(email);
+        List<Basket> baskets = basketService.getBasketsByEmail(email);
 
-        return ResponseEntity.ok(baskets);
+        return ResponseEntity.ok(BasketMapper.entityToDtoList(baskets));
     }
 
     @PostMapping("/basket/post/{itemId}")

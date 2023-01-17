@@ -72,12 +72,12 @@ public class ItemService {
     }
 
     @Transactional
-    public void minusRemaining(Long id) {
+    public void minusSingleRemaining(Long id) {
         itemRepository.minusRemaining(id);
     }
 
     @Transactional
-    public void multipleMinusRemaining(List<Basket> baskets) {
+    public void minusMultipleRemaining(List<Basket> baskets) {
         for (Basket basket : baskets) {
             Long itemId = basket.getItem().getId();
             itemRepository.minusRemaining(itemId);

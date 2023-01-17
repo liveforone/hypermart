@@ -100,8 +100,13 @@ public class MemberService {
     }
 
     @Transactional
-    public void updateOrderCount(String email) {
-        memberRepository.updateOrderCount(email);
+    public void updateSingleOrderCount(String email) {
+        memberRepository.updateSingleOrderCount(email);
+    }
+
+    @Transactional
+    public void updateMultipleOrderCount(int orderCount, String email) {
+        memberRepository.updateMultipleOrderCount(orderCount, email);
     }
 
     @Transactional

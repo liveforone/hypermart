@@ -44,7 +44,7 @@ public class OrdersController {
 
         String email = principal.getName();
         ordersService.saveSingleOrder(item, email, ordersRequest);
-        memberService.updateOrderCount(email);
+        memberService.updateSingleOrderCount(email);
         log.info("단일 주문 성공");
 
         String url = "/item/" + itemId;
@@ -63,7 +63,9 @@ public class OrdersController {
             return ResponseEntity.ok("장바구니가 비어있습니다.");
         }
 
+        int orderCount = baskets.size();
         ordersService.saveBasketOrder(baskets);
+        memberService.updateMultipleOrderCount(orderCount, email);
         log.info("장바구니 주문 성공");
         basketService.deleteBasketsByEmail(email);
         log.info("장바구니 성공적으로 비움");

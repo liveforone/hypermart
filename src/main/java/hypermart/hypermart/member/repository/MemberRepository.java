@@ -30,7 +30,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Modifying
     @Query("update Member m set m.orderCount = m.orderCount + 1 where m.email = :email")
-    void updateOrderCount(@Param("email") String email);
+    void updateSingleOrderCount(@Param("email") String email);
+
+    @Modifying
+    @Query("update Member m set m.orderCount = m.orderCount + :orderCount where m.email = :email")
+    void updateMultipleOrderCount(@Param("orderCount") int orderCount, @Param("email") String email);
 
     @Modifying(clearAutomatically = true)
     @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount > 14")

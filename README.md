@@ -26,7 +26,7 @@
 * [상품팀](https://github.com/liveforone/hypermart/wiki/%EC%83%81%ED%92%88%ED%8C%80)
 * [추천팀](https://github.com/liveforone/hypermart/wiki/%EC%B6%94%EC%B2%9C%ED%8C%80)
 * [리뷰팀](https://github.com/liveforone/hypermart/wiki/%EB%A6%AC%EB%B7%B0%ED%8C%80) 
-* [장바구니팀]()
+* [장바구니팀](https://github.com/liveforone/hypermart/wiki/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%ED%8C%80)
 * [주문팀]()
 ## 전체 요구사항 간단 정리
 * 회원은 3종류가 존재한다. MEMBER(일반회원), ADMIN(운영자), SELLER(판매자)
@@ -73,19 +73,6 @@
 * [작성자 판별은 어디서 해야할까?](https://github.com/liveforone/hypermart/wiki/%EC%9E%91%EC%84%B1%EC%9E%90-%ED%8C%90%EB%B3%84%EC%9D%80-%EC%96%B4%EB%94%94%EC%84%9C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 
 [할일]
-장바구니팀 만들기(주문보다 먼저)
-Basket {
-private Long id;
-private Member member;
-private Item item;
-}
-생성, 삭제(수정 없음)
-페이징 말고 리스트로 가져옴. 조건은 이메일로 가져옴
-장바구니로 주문이 끝나고 나면 삭제하기
-장바구니 만료기한을 정할까 했지만, 하지 않음. 영구임.
-추천처럼 로그성 테이블임.
-상품 삭제시 장바구니도 삭제됨
-
 Orders {
     private Long id;
     private Item item;
@@ -98,10 +85,10 @@ Orders {
 주문 취소
 할인(회원등급, 특가)
 주문시 유저 orderCount + 1
+장바구니로 주문이 끝나고 나면 삭제하기
 판매자 페이지에 상품별 주문갯수(sum쿼리이용)
 주문이 완성되면, 추천과 리뷰를 save할때 주문한 상품인지(where절로 member, item, state 판별해서 가져오기)
 판단하고 주문했다면 가능하게 하도록 추가하기. 문서화도 추가!
-
 하나의 주문에 여러개의 상품을 담을 순 없다.
 장바구니처럼 여러 상품을 주문시에는 for-each사용해서 다중 연산을 하면된다.
 

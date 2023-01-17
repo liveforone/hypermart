@@ -5,6 +5,7 @@ import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.member.model.Member;
 import hypermart.hypermart.member.repository.MemberRepository;
 import hypermart.hypermart.orders.dto.OrdersRequest;
+import hypermart.hypermart.orders.dto.OrdersResponse;
 import hypermart.hypermart.orders.model.OrderState;
 import hypermart.hypermart.orders.model.Orders;
 import hypermart.hypermart.orders.repository.OrdersRepository;
@@ -12,6 +13,8 @@ import hypermart.hypermart.orders.util.DiscountPolicy;
 import hypermart.hypermart.orders.util.OrderClock;
 import hypermart.hypermart.orders.util.OrdersMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,12 @@ public class OrdersService {
 
     private final OrdersRepository ordersRepository;
     private final MemberRepository memberRepository;
+
+    public Page<OrdersResponse> getOrdersByEmail(String email, Pageable pageable) {
+        return OrdersMapper.entityToDtoPage(
+                ordersRepository.findOrdersByEmail(email, pageable)
+        );
+    }
 
     public List<Orders> getOrdersByMemberAndItem(Member member, Item item) {
         return ordersRepository.findOrdersByMemberAndItem(

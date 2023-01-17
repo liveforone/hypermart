@@ -6,16 +6,19 @@ import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
 import hypermart.hypermart.member.service.MemberService;
 import hypermart.hypermart.orders.dto.OrdersRequest;
+import hypermart.hypermart.orders.dto.OrdersResponse;
 import hypermart.hypermart.orders.service.OrdersService;
 import hypermart.hypermart.utility.CommonUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -29,6 +32,20 @@ public class OrdersController {
     private final ItemService itemService;
     private final MemberService memberService;
     private final BasketService basketService;
+
+    @GetMapping("/my-order")
+    public ResponseEntity<Page<OrdersResponse>> myOrderPage(
+            @PageableDefault(page = 0, size = 10)
+            @SortDefault.SortDefaults({
+                    @SortDefault(sort = "id", direction = Sort.Direction.DESC)
+            }) Pageable pageable,
+            Principal principal
+    ) {
+        String email = principal.getName();
+        Page<OrdersResponse> orders = ordersService.getOrdersByEmail(email, pageable);
+
+        return ResponseEntity.ok(orders);
+    }
 
     @PostMapping("/order/single/{itemId}")
     public ResponseEntity<?> postSingleOrder(

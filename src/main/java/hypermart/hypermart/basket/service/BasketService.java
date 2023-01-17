@@ -44,6 +44,12 @@ public class BasketService {
     }
 
     @Transactional
+    public void deleteBasketsByEmail(String email) {
+        Member member = memberRepository.findByEmail(email);
+        basketRepository.deleteBulkBasketsByMember(member);
+    }
+
+    @Transactional
     public void deleteBasketsByItem(Item item) {
         basketRepository.deleteBulkBasketsByItem(item);
     }

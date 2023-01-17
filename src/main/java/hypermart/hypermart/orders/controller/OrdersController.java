@@ -4,6 +4,7 @@ import hypermart.hypermart.basket.model.Basket;
 import hypermart.hypermart.basket.service.BasketService;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
+import hypermart.hypermart.item.util.ItemRemainingCheck;
 import hypermart.hypermart.member.service.MemberService;
 import hypermart.hypermart.orders.dto.OrdersRequest;
 import hypermart.hypermart.orders.dto.OrdersResponse;
@@ -59,6 +60,16 @@ public class OrdersController {
             return ResponseEntity.ok("존재하지 않는 상품입니다.");
         }
 
+        int remaining = item.getRemaining();
+        if (ItemRemainingCheck.isSoldOut(remaining)) {
+            return ResponseEntity.ok("품절된 상품입니다.");
+        }
+
+        int orderQuantity = ordersRequest.getOrderQuantity();
+        if (ItemRemainingCheck.isOverRemaining(remaining, orderQuantity)) {
+            return ResponseEntity.ok("주문 수량이 재고를 초과합니다.");
+        }
+
         String email = principal.getName();
         ordersService.saveSingleOrder(item, email, ordersRequest);
         memberService.updateSingleOrderCount(email);
@@ -78,6 +89,10 @@ public class OrdersController {
 
         if (CommonUtils.isNull(baskets)) {
             return ResponseEntity.ok("장바구니가 비어있습니다.");
+        }
+
+        if (ItemRemainingCheck.isSoldOutForMultiple(baskets)) {
+            return ResponseEntity.ok("품절된 상품입니다.");
         }
 
         int orderCount = baskets.size();

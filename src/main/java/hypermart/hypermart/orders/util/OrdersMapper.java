@@ -22,7 +22,7 @@ public class OrdersMapper {
         return OrdersResponse.builder()
                 .id(orders.getId())
                 .orderState(orders.getOrderState())
-                .orderCount(orders.getOrderCount())
+                .orderCount(orders.getOrderQuantity())
                 .totalPrice(orders.getTotalPrice())
                 .itemId(orders.getItem().getId())
                 .itemTitle(orders.getItem().getTitle())

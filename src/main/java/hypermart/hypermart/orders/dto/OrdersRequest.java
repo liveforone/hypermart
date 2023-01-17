@@ -16,7 +16,7 @@ public class OrdersRequest {
 
     private Long id;
     private OrderState orderState;
-    private int orderCount;
+    private int orderQuantity;
     private int totalPrice;
     private Member member;
     private Item item;

@@ -45,18 +45,18 @@ public class OrdersService {
     @Transactional
     public void saveSingleOrder(Item item, String email, OrdersRequest ordersRequest) {
         Member member = memberRepository.findByEmail(email);
-        int orderCount = ordersRequest.getOrderCount();
+        int orderQuantity = ordersRequest.getOrderQuantity();
         int totalPrice;
 
         if (OrderClock.isSpecialDiscountTime()) {
-            totalPrice = DiscountPolicy.calculateSpecialDiscount(item, orderCount);
+            totalPrice = DiscountPolicy.calculateSpecialDiscount(item, orderQuantity);
         } else {
-            totalPrice = DiscountPolicy.calculateDiscount(item, member, orderCount);
+            totalPrice = DiscountPolicy.calculateDiscount(item, member, orderQuantity);
         }
 
         ordersRequest = OrdersRequest.builder()
                 .totalPrice(totalPrice)
-                .orderCount(orderCount)
+                .orderQuantity(orderQuantity)
                 .orderState(OrderState.ORDER)
                 .item(item)
                 .member(member)
@@ -66,7 +66,7 @@ public class OrdersService {
 
     @Transactional
     public void saveBasketOrder(List<Basket> baskets) {
-        int orderCount = 1;
+        int orderQuantity = 1;
 
         for (Basket basket : baskets) {
             Item item = basket.getItem();
@@ -74,13 +74,13 @@ public class OrdersService {
             int totalPrice;
 
             if (OrderClock.isSpecialDiscountTime()) {
-                totalPrice = DiscountPolicy.calculateSpecialDiscount(item, orderCount);
+                totalPrice = DiscountPolicy.calculateSpecialDiscount(item, orderQuantity);
             } else {
-                totalPrice = DiscountPolicy.calculateDiscount(item, member, orderCount);
+                totalPrice = DiscountPolicy.calculateDiscount(item, member, orderQuantity);
             }
 
             OrdersRequest ordersRequest = OrdersRequest.builder()
-                    .orderCount(orderCount)
+                    .orderQuantity(orderQuantity)
                     .orderState(OrderState.ORDER)
                     .totalPrice(totalPrice)
                     .item(item)

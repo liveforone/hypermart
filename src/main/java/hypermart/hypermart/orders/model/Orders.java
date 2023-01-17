@@ -24,7 +24,7 @@ public class Orders {
 
     @Enumerated(value = EnumType.STRING)
     private OrderState orderState;
-    private int orderCount;
+    private int orderQuantity;
     private int totalPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,10 +40,10 @@ public class Orders {
     private LocalDate createdDate;
 
     @Builder
-    public Orders(Long id, OrderState orderState, int orderCount, int totalPrice, Member member, Item item) {
+    public Orders(Long id, OrderState orderState, int orderQuantity, int totalPrice, Member member, Item item) {
         this.id = id;
         this.orderState = orderState;
-        this.orderCount = orderCount;
+        this.orderQuantity = orderQuantity;
         this.totalPrice = totalPrice;
         this.member = member;
         this.item = item;

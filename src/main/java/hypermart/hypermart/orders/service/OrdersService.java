@@ -37,19 +37,21 @@ public class OrdersService {
     public void saveSingleOrder(Item item, String email, OrdersRequest ordersRequest) {
         Member member = memberRepository.findByEmail(email);
         int orderCount = ordersRequest.getOrderCount();
+        int totalPrice;
 
         if (OrderClock.isSpecialDiscountTime()) {
-            ordersRequest.setTotalPrice(
-                    DiscountPolicy.calculateSpecialDiscount(item, orderCount)
-            );
+            totalPrice = DiscountPolicy.calculateSpecialDiscount(item, orderCount);
         } else {
-            ordersRequest.setTotalPrice(
-                    DiscountPolicy.calculateDiscount(item, member, orderCount)
-            );
+            totalPrice = DiscountPolicy.calculateDiscount(item, member, orderCount);
         }
-        ordersRequest.setOrderState(OrderState.ORDER);
-        ordersRequest.setItem(item);
-        ordersRequest.setMember(member);
+
+        ordersRequest = OrdersRequest.builder()
+                .totalPrice(totalPrice)
+                .orderCount(orderCount)
+                .orderState(OrderState.ORDER)
+                .item(item)
+                .member(member)
+                .build();
         ordersRepository.save(OrdersMapper.dtoToEntity(ordersRequest));
     }
 
@@ -60,21 +62,21 @@ public class OrdersService {
         for (Basket basket : baskets) {
             Item item = basket.getItem();
             Member member = basket.getMember();
+            int totalPrice;
 
-            OrdersRequest ordersRequest = new OrdersRequest();
             if (OrderClock.isSpecialDiscountTime()) {
-                ordersRequest.setTotalPrice(
-                        DiscountPolicy.calculateSpecialDiscount(item, orderCount)
-                );
+                totalPrice = DiscountPolicy.calculateSpecialDiscount(item, orderCount);
             } else {
-                ordersRequest.setTotalPrice(
-                        DiscountPolicy.calculateDiscount(item, member, orderCount)
-                );
+                totalPrice = DiscountPolicy.calculateDiscount(item, member, orderCount);
             }
-            ordersRequest.setOrderCount(orderCount);
-            ordersRequest.setOrderState(OrderState.ORDER);
-            ordersRequest.setItem(item);
-            ordersRequest.setMember(member);
+
+            OrdersRequest ordersRequest = OrdersRequest.builder()
+                    .orderCount(orderCount)
+                    .orderState(OrderState.ORDER)
+                    .totalPrice(totalPrice)
+                    .item(item)
+                    .member(member)
+                    .build();
             ordersRepository.save(OrdersMapper.dtoToEntity(ordersRequest));
         }
     }

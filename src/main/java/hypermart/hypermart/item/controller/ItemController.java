@@ -1,5 +1,6 @@
 package hypermart.hypermart.item.controller;
 
+import hypermart.hypermart.basket.service.BasketService;
 import hypermart.hypermart.comment.service.CommentService;
 import hypermart.hypermart.item.dto.ItemRequest;
 import hypermart.hypermart.item.dto.ItemResponse;
@@ -37,6 +38,7 @@ public class ItemController {
     private final UploadFileService uploadFileService;
     private final CommentService commentService;
     private final RecommendationService recommendationService;
+    private final BasketService basketService;
 
     @GetMapping("/item")
     public ResponseEntity<Page<ItemResponse>> itemHome(
@@ -234,6 +236,8 @@ public class ItemController {
         log.info("연관 리뷰 전체 삭제 성공");
         recommendationService.deleteRecommendationsByItem(item);
         log.info("연관 추천 전체 삭제 성공");
+        basketService.deleteBasketsByItem(item);
+        log.info("연관 장바구니 전체 삭제 성공");
         itemService.deleteItem(id);
         log.info("상품 삭제 성공");
 

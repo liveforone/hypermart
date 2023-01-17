@@ -55,6 +55,27 @@ public class OrdersService {
 
     @Transactional
     public void saveBasketOrder(List<Basket> baskets) {
+        int orderCount = 1;
 
+        for (Basket basket : baskets) {
+            Item item = basket.getItem();
+            Member member = basket.getMember();
+
+            OrdersRequest ordersRequest = new OrdersRequest();
+            if (OrderClock.isSpecialDiscountTime()) {
+                ordersRequest.setTotalPrice(
+                        DiscountPolicy.calculateSpecialDiscount(item, orderCount)
+                );
+            } else {
+                ordersRequest.setTotalPrice(
+                        DiscountPolicy.calculateDiscount(item, member, orderCount)
+                );
+            }
+            ordersRequest.setOrderCount(orderCount);
+            ordersRequest.setOrderState(OrderState.ORDER);
+            ordersRequest.setItem(item);
+            ordersRequest.setMember(member);
+            ordersRepository.save(OrdersMapper.dtoToEntity(ordersRequest));
+        }
     }
 }

@@ -57,8 +57,4 @@ public class OrdersService {
     public void saveBasketOrder(List<Basket> baskets) {
 
     }
-
-    private int calculateTotalPrice(int price, int orderCount) {
-        return price * orderCount;
-    }
 }

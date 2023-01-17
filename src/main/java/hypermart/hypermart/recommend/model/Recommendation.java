@@ -3,13 +3,12 @@ package hypermart.hypermart.recommend.model;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.member.model.Member;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Recommendation {
 
@@ -24,4 +23,11 @@ public class Recommendation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    @Builder
+    public Recommendation(Long id, Member member, Item item) {
+        this.id = id;
+        this.member = member;
+        this.item = item;
+    }
 }

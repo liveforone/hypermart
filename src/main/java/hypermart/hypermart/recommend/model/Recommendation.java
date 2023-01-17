@@ -3,13 +3,14 @@ package hypermart.hypermart.recommend.model;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.member.model.Member;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Recommendation {
 
     @Id

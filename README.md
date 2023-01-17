@@ -27,7 +27,7 @@
 * [추천팀](https://github.com/liveforone/hypermart/wiki/%EC%B6%94%EC%B2%9C%ED%8C%80)
 * [리뷰팀](https://github.com/liveforone/hypermart/wiki/%EB%A6%AC%EB%B7%B0%ED%8C%80) 
 * [장바구니팀](https://github.com/liveforone/hypermart/wiki/%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%ED%8C%80)
-* [주문팀]()
+* [주문팀](https://github.com/liveforone/hypermart/wiki/%EC%A3%BC%EB%AC%B8%ED%8C%80)
 ## 전체 요구사항 간단 정리
 * 회원은 3종류가 존재한다. MEMBER(일반회원), ADMIN(운영자), SELLER(판매자)
 * 일반회원은 등급이 존재하며 등급에 따라 할인 폭이 달라진다.
@@ -46,10 +46,12 @@
 * 주문시에 할인은 자동으로 들어간다. 
 * 할인정책은 두 종류가 있다. 회원 등급할인과 상품 특가 할인이다.
 * 상품 특가 할인은 저녁 9시부터 10시까지이며 전체 상품의 20%를 할인한다.
+* 할인은 하나만 적용된다.
 * 모든 수정, 삭제의 과정은 작성자인지 반드시 프론트와 서버 모두에서 판별한다.
 * 서버는 프론트에서도 판별할 수 있게 현재 유저와 작성자를 반드시 내보낸다.
 
 # 4. ER Diagram
+![스크린샷(157)](https://user-images.githubusercontent.com/88976237/212882582-b735c41a-8539-4f0e-8ea0-766fd60bd380.png)
 
 # 5. 스타일 가이드
 * 스타일 가이드는 필자가 프로젝트를 진행하며 느낀 좋은 코드와, 
@@ -71,33 +73,4 @@
 * [Jwt 리다이렉트는 어떻게 해야할까?](https://github.com/liveforone/hypermart/wiki/Jwt-%EB%A6%AC%EB%8B%A4%EC%9D%B4%EB%A0%89%ED%8A%B8%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 * [중복체크는 어떻게 해야할까?](https://github.com/liveforone/hypermart/wiki/%EC%A4%91%EB%B3%B5%EC%B2%B4%ED%81%AC%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 * [작성자 판별은 어디서 해야할까?](https://github.com/liveforone/hypermart/wiki/%EC%9E%91%EC%84%B1%EC%9E%90-%ED%8C%90%EB%B3%84%EC%9D%80-%EC%96%B4%EB%94%94%EC%84%9C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
-
-[할일]
-Orders {
-    private Long id;
-    private Item item;
-    private Member member;
-    private OrderStatus status; //ORDER, CANCEL
-    private int orderCount;
-    private LocalDate createdDate;
-}
-리뷰와 추천에서 주문했는지 체크하는 메서드
-주문 취소
-할인(회원등급, 특가)
-주문시 유저 orderCount + 1
-장바구니로 주문이 끝나고 나면 삭제하기
-판매자 페이지에 상품별 주문갯수(sum쿼리이용)
-주문이 완성되면, 추천과 리뷰를 save할때 주문한 상품인지(where절로 member, item, state 판별해서 가져오기)
-판단하고 주문했다면 가능하게 하도록 추가하기. 문서화도 추가!
-하나의 주문에 여러개의 상품을 담을 순 없다.
-장바구니처럼 여러 상품을 주문시에는 for-each사용해서 다중 연산을 하면된다.
-
-[팀 종류]
-회원팀, 상품팀, 추천팀(좋아요), 리뷰팀, 장바구니팀, 주문팀(주문 + 할인 시스템), 
-
-[장바구니]
-장바구니는 간단하다. 장바구니 테이블을 만들고 장바구니에 저장한다.
-장바구니를 볼 수 있으며, 장바구니에서 필요하지 않은 상품은 삭제할 수 있다.
-장바구니는 추가와 삭제만되는 구조이다.
-장바구니로 주문하면 for-each문으로 주문()쿼리를 날린다.
-for-each문안에 삭제 쿼리를 넣어서 주문하고 + 삭제하고 를 반복한다.
+* [하루중 원하는 시간은 어떻게 구할까?](https://github.com/liveforone/hypermart/wiki/%ED%95%98%EB%A3%A8%EC%A4%91-%EC%9B%90%ED%95%98%EB%8A%94-%EC%8B%9C%EA%B0%84%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B5%AC%ED%95%A0%EA%B9%8C%3F)

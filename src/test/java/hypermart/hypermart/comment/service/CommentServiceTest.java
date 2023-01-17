@@ -5,6 +5,7 @@ import hypermart.hypermart.item.dto.ItemRequest;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
 import hypermart.hypermart.member.dto.MemberRequest;
+import hypermart.hypermart.member.model.Member;
 import hypermart.hypermart.member.service.MemberService;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
@@ -30,7 +31,7 @@ class CommentServiceTest {
 
 
     @Transactional
-    private Long createItemAndMember(String email) {
+    private void createMember(String email) {
         String password = "1111";
         int orderCount = 10;
         String address = "seoul";
@@ -42,7 +43,10 @@ class CommentServiceTest {
         memberService.signup(memberRequest);
         em.flush();
         em.clear();
+    }
 
+    @Transactional
+    private Long createItem(String email) {
         ItemRequest itemRequest = new ItemRequest();
         itemRequest.setTitle("test_snack");
         itemRequest.setContent("test_content");
@@ -58,9 +62,10 @@ class CommentServiceTest {
     @Transactional
     private Long createComment(Long itemId, String content, String email) {
         Item item = itemService.getItemDetail(itemId);
+        Member member = memberService.getMemberEntity(email);
         CommentRequest commentRequest = new CommentRequest();
         commentRequest.setContent(content);
-        return commentService.saveComment(commentRequest, item, email);
+        return commentService.saveComment(commentRequest, item, member);
     }
 
     @Test
@@ -69,7 +74,8 @@ class CommentServiceTest {
         //given
         String email = "yc2222@gmail.com";
         String content = "content";
-        Long itemId = createItemAndMember(email);
+        createMember(email);
+        Long itemId = createItem(email);
         Long commentId = createComment(itemId, content, email);
 
         //when

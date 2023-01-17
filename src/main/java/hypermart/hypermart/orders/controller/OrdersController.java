@@ -123,7 +123,7 @@ public class OrdersController {
 
         String email = principal.getName();
         String member = orders.getMember().getEmail();
-        if (Objects.equals(email, member)) {
+        if (!Objects.equals(email, member)) {
             return ResponseEntity.ok("주문한 사람만 주문취소가 가능합니다.");
         }
 

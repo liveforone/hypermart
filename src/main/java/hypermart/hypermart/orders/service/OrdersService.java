@@ -28,6 +28,10 @@ public class OrdersService {
     private final OrdersRepository ordersRepository;
     private final MemberRepository memberRepository;
 
+    public Orders getOrderDetail(Long id) {
+        return ordersRepository.findOneById(id);
+    }
+
     public Page<OrdersResponse> getOrdersByEmail(String email, Pageable pageable) {
         return OrdersMapper.entityToDtoPage(
                 ordersRepository.findOrdersByEmail(email, pageable)
@@ -88,5 +92,15 @@ public class OrdersService {
                     .build();
             ordersRepository.save(OrdersMapper.dtoToEntity(ordersRequest));
         }
+    }
+
+    @Transactional
+    public void cancelOrder(Long id) {
+        ordersRepository.cancelOrder(OrderState.CANCEL, id);
+    }
+
+    @Transactional
+    public void deleteOrdersByItem(Item item) {
+        ordersRepository.deleteBulkOrdersByItem(item);
     }
 }

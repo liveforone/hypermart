@@ -110,6 +110,11 @@ public class MemberService {
     }
 
     @Transactional
+    public void minusOrderCount(String email) {
+        memberRepository.minusOrderCount(email);
+    }
+
+    @Transactional
     public void deleteUser(Long id) {
         memberRepository.deleteById(id);
     }

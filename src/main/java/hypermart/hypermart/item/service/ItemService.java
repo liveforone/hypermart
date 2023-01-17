@@ -85,6 +85,11 @@ public class ItemService {
     }
 
     @Transactional
+    public void plusRemaining(Long id) {
+        itemRepository.plusRemaining(id);
+    }
+
+    @Transactional
     public void increaseOneGood(Long id) {
         itemRepository.plusGood(id);
     }

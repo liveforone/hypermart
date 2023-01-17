@@ -106,7 +106,6 @@ public class ItemController {
 
     @GetMapping("/seller-page")
     public ResponseEntity<List<ItemResponse>> sellerPage(Principal principal) {
-        //상품에 맞는 주문갯수(통계쿼리 sum)
         String email = principal.getName();
         List<ItemResponse> items = itemService.getItemsByWriter(email);
 

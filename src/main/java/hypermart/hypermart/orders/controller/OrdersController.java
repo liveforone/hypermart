@@ -76,7 +76,7 @@ public class OrdersController {
         String email = principal.getName();
         ordersService.saveSingleOrder(item, email, ordersRequest);
         memberService.updateSingleOrderCount(email);
-        itemService.minusSingleRemaining(itemId);
+        itemService.minusSingleRemaining(itemId, orderQuantity);
         log.info("단일 주문 성공");
 
         String url = "/item/" + itemId;

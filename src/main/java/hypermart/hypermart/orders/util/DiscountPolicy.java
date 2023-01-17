@@ -21,8 +21,9 @@ public class DiscountPolicy {
         }
         if (memberGrade == MemberGrade.SILVER) {
             return totalPrice * 99 / 100;
+        } else {
+            return totalPrice;
         }
-        return totalPrice;
     }
 
     public static int calculateSpecialDiscount(Item item, int orderCount) {

@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
 
-    @Query("select o from Orders o join fetch o.member join fetch o.item where o.orderState = :orderState o.member = :member and o.item = :item")
+    @Query("select o from Orders o join fetch o.member join fetch o.item where o.orderState = :orderState and o.member = :member and o.item = :item")
     List<Orders> findOrdersByMemberAndItem(@Param("orderState") OrderState orderState, @Param("member") Member member, @Param("item") Item item);
 }

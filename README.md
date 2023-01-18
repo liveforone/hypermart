@@ -54,8 +54,8 @@
 ![스크린샷(157)](https://user-images.githubusercontent.com/88976237/212882582-b735c41a-8539-4f0e-8ea0-766fd60bd380.png)
 
 # 5. 스타일 가이드
-* 스타일 가이드는 필자가 프로젝트를 진행하며 느낀 좋은 코드와, 
-* 책을 읽다가 필자 또한 공감할 수 있는 내용들에 대해 필자의 생각으로 작성하였다.
+* 스타일 가이드는 필자가 생각하는 좋은 코드와 필자의 클린코드 철학이 담긴 문서이다.
+* 해당 프로젝트는 스타일가이드를 모두 지키며 코드를 작성했다.
 * [나만의 스타일 가이드](https://github.com/liveforone/study/tree/main/%5B%EB%82%98%EB%A7%8C%EC%9D%98%20%EC%8A%A4%ED%83%80%EC%9D%BC%20%EA%B0%80%EC%9D%B4%EB%93%9C%5D)에서 전문을 읽을 수 있다.
 * [가독성](https://github.com/liveforone/study/blob/main/%5B%EB%82%98%EB%A7%8C%EC%9D%98%20%EC%8A%A4%ED%83%80%EC%9D%BC%20%EA%B0%80%EC%9D%B4%EB%93%9C%5D/b.%20%EA%B0%80%EB%8F%85%EC%84%B1.md)
 * [Null과 중복체크](https://github.com/liveforone/study/blob/main/%5B%EB%82%98%EB%A7%8C%EC%9D%98%20%EC%8A%A4%ED%83%80%EC%9D%BC%20%EA%B0%80%EC%9D%B4%EB%93%9C%5D/c.%20Null%EA%B3%BC%20%EC%A4%91%EB%B3%B5%20%EC%B2%B4%ED%81%AC.md)

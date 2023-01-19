@@ -59,16 +59,16 @@ public class MemberController {
 
     @PostMapping("/member/login")
     public ResponseEntity<?> login(@RequestBody MemberRequest memberRequest) {
-        String email = memberRequest.getEmail();
-        Member member = memberService.getMemberEntity(email);
+        String requestEmail = memberRequest.getEmail();
+        Member foundMember = memberService.getMemberEntity(requestEmail);
 
-        if (CommonUtils.isNull(member)) {
+        if (CommonUtils.isNull(foundMember)) {
             log.info("잘못된 이메일.");
             return ResponseEntity.ok("회원 조회가 되지않아 로그인이 불가능합니다.");
         }
 
         String inputPw = memberRequest.getPassword();
-        String originalPw = member.getPassword();
+        String originalPw = foundMember.getPassword();
         if (MemberPassword.isNotMatchingPassword(inputPw, originalPw)) {
             log.info("비밀번호가 일치하지 않음.");
             return ResponseEntity.ok("비밀번호가 다릅니다. 다시 시도하세요.");
@@ -82,7 +82,8 @@ public class MemberController {
 
     @GetMapping("/member/my-page")
     public ResponseEntity<MemberResponse> myPage(Principal principal) {
-        Member member = memberService.getMemberEntity(principal.getName());
+        String email = principal.getName();
+        Member member = memberService.getMemberEntity(email);
 
         return ResponseEntity.ok(MemberMapper.dtoBuilder(member));
     }

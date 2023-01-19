@@ -8,8 +8,8 @@ public class DiscountPolicy {
 
     public static int calculateDiscount(Item item, Member member, int orderCount) {
         int totalPrice = item.getPrice() * orderCount;
-        MemberGrade memberGrade = member.getMemberGrade();
 
+        MemberGrade memberGrade = member.getMemberGrade();
         if (memberGrade == MemberGrade.DIA) {
             return totalPrice * 92 / 100;
         }
@@ -28,7 +28,6 @@ public class DiscountPolicy {
 
     public static int calculateSpecialDiscount(Item item, int orderCount) {
         int totalPrice = item.getPrice() * orderCount;
-
         return totalPrice * 80 / 100;
     }
 }

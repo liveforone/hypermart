@@ -76,7 +76,7 @@ public class OrdersController {
         String email = principal.getName();
         ordersService.saveSingleOrder(item, email, ordersRequest);
         memberService.increaseSingleOrderCount(email);
-        itemService.minusSingleRemaining(itemId, orderQuantity);
+        itemService.decreaseMultipleRemainingForSingleOrder(itemId, orderQuantity);
         log.info("단일 주문 성공");
 
         String url = "/item/" + itemId;
@@ -102,7 +102,7 @@ public class OrdersController {
         int orderCount = baskets.size();
         ordersService.saveBasketOrder(baskets);
         memberService.increaseMultipleOrderCount(orderCount, email);
-        itemService.minusMultipleRemaining(baskets);
+        itemService.decreaseSingleRemainingForBasketOrder(baskets);
         log.info("장바구니 주문 성공");
         basketService.deleteBasketsByEmail(email);
         log.info("장바구니 성공적으로 비움");
@@ -137,7 +137,7 @@ public class OrdersController {
         memberService.decreaseOrderCount(email);
         log.info("주문 횟수 복구 성공");
         Long itemId = orders.getItem().getId();
-        itemService.plusRemaining(itemId);
+        itemService.increaseSingleRemaining(itemId);
         log.info("상품 재고 복구 성공");
 
         return ResponseEntity.ok("주문을 성공적으로 취소하였습니다");

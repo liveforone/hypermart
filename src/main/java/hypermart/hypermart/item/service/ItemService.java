@@ -67,31 +67,31 @@ public class ItemService {
     }
 
     @Transactional
-    public void updateRemaining(int inputRemaining, Long id) {
-        itemRepository.updateRemaining(inputRemaining, id);
+    public void restockItem(int inputRemaining, Long id) {
+        itemRepository.restockItem(inputRemaining, id);
     }
 
     @Transactional
-    public void minusSingleRemaining(Long id, int orderQuantity) {
-        itemRepository.minusRemaining(orderQuantity, id);
+    public void decreaseMultipleRemainingForSingleOrder(Long id, int orderQuantity) {
+        itemRepository.decreaseMultipleRemaining(orderQuantity, id);
     }
 
     @Transactional
-    public void minusMultipleRemaining(List<Basket> baskets) {
+    public void decreaseSingleRemainingForBasketOrder(List<Basket> baskets) {
         for (Basket basket : baskets) {
             Long itemId = basket.getItem().getId();
-            itemRepository.minusOneRemaining(itemId);
+            itemRepository.decreaseSingleRemaining(itemId);
         }
     }
 
     @Transactional
-    public void plusRemaining(Long id) {
-        itemRepository.plusRemaining(id);
+    public void increaseSingleRemaining(Long id) {
+        itemRepository.increaseSingleRemaining(id);
     }
 
     @Transactional
     public void increaseOneGood(Long id) {
-        itemRepository.plusGood(id);
+        itemRepository.increaseGood(id);
     }
 
     @Transactional

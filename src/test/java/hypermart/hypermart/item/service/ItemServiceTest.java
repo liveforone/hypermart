@@ -73,7 +73,7 @@ class ItemServiceTest {
 
         //when
         int remaining = 10;
-        itemService.updateRemaining(remaining, itemId);
+        itemService.restockItem(remaining, itemId);
         em.flush();
         em.clear();
 

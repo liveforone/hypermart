@@ -191,7 +191,7 @@ public class ItemController {
     }
 
     @PutMapping("/item/update-remaining/{id}")
-    public ResponseEntity<?> updateRemaining(
+    public ResponseEntity<?> restockItem(
             @PathVariable("id") Long id,
             @RequestBody int remaining,
             Principal principal
@@ -208,7 +208,7 @@ public class ItemController {
             return ResponseEntity.ok("작성자만 재고를 업데이트 할 수 있습니다.");
         }
 
-        itemService.updateRemaining(remaining, id);
+        itemService.restockItem(remaining, id);
         log.info("재고 업데이트 성공");
 
         return ResponseEntity.ok("재고 업데이트를 성공적으로 완료하였습니다.");

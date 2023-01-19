@@ -50,14 +50,12 @@ public class MemberService {
         if (Objects.equals(memberRequest.getEmail(), "admin@hypermart.com")) {
             memberRequest.setAuth(Role.ADMIN);
             memberRequest.setMemberGrade(MemberGrade.ADMIN);
-        }else {
+        } else {
             memberRequest.setAuth(Role.MEMBER);
             memberRequest.setMemberGrade(MemberGrade.BRONZE);
         }
 
-        memberRepository.save(
-                MemberMapper.dtoToEntity(memberRequest)
-        );
+        memberRepository.save(MemberMapper.dtoToEntity(memberRequest));
     }
 
     @Transactional

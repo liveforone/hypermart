@@ -74,13 +74,13 @@ public class MemberService {
     }
 
     @Transactional
-    public void regiAddress(String address, String email) {
-        memberRepository.regiAddress(address, email);
+    public void updateAddress(String address, String email) {
+        memberRepository.updateAddress(address, email);
     }
 
     @Transactional
     public void regiSeller(String email) {
-        memberRepository.regiSeller(Role.SELLER, MemberGrade.SELLER, email);
+        memberRepository.updateAuthToSeller(Role.SELLER, MemberGrade.SELLER, email);
     }
 
     @Transactional
@@ -95,18 +95,18 @@ public class MemberService {
     }
 
     @Transactional
-    public void updateSingleOrderCount(String email) {
-        memberRepository.updateSingleOrderCount(email);
+    public void increaseSingleOrderCount(String email) {
+        memberRepository.increaseSingleOrderCount(email);
     }
 
     @Transactional
-    public void updateMultipleOrderCount(int orderCount, String email) {
-        memberRepository.updateMultipleOrderCount(orderCount, email);
+    public void increaseMultipleOrderCount(int orderCount, String email) {
+        memberRepository.increaseMultipleOrderCount(orderCount, email);
     }
 
     @Transactional
-    public void minusOrderCount(String email) {
-        memberRepository.minusOrderCount(email);
+    public void decreaseOrderCount(String email) {
+        memberRepository.decreaseOrderCount(email);
     }
 
     @Transactional

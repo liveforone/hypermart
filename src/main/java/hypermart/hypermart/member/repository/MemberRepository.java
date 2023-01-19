@@ -14,11 +14,11 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Modifying
     @Query("update Member m set m.address = :address where m.email = :email")
-    void regiAddress(@Param("address") String address, @Param("email") String email);
+    void updateAddress(@Param("address") String address, @Param("email") String email);
 
     @Modifying
     @Query("update Member m set m.auth = :auth, m.memberGrade = :memberGrade where m.email = :email")
-    void regiSeller(@Param("auth") Role auth, @Param("memberGrade") MemberGrade memberGrade, @Param("email") String email);
+    void updateAuthToSeller(@Param("auth") Role auth, @Param("memberGrade") MemberGrade memberGrade, @Param("email") String email);
 
     @Modifying
     @Query("update Member m set m.email = :newEmail where m.email = :oldEmail")
@@ -30,15 +30,15 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Modifying
     @Query("update Member m set m.orderCount = m.orderCount + 1 where m.email = :email")
-    void updateSingleOrderCount(@Param("email") String email);
+    void increaseSingleOrderCount(@Param("email") String email);
 
     @Modifying
     @Query("update Member m set m.orderCount = m.orderCount + :orderCount where m.email = :email")
-    void updateMultipleOrderCount(@Param("orderCount") int orderCount, @Param("email") String email);
+    void increaseMultipleOrderCount(@Param("orderCount") int orderCount, @Param("email") String email);
 
     @Modifying
     @Query("update Member m set m.orderCount = m.orderCount - 1 where m.email = :email")
-    void minusOrderCount(@Param("email") String email);
+    void decreaseOrderCount(@Param("email") String email);
 
     @Modifying(clearAutomatically = true)
     @Query("update Member m set m.memberGrade = :memberGrade where m.orderCount > 14")

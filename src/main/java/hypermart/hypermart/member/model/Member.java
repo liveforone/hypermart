@@ -28,26 +28,26 @@ public class Member implements UserDetails {
     @Column(length = 100, nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String address;
+
+    private int orderCount;
+
     @Enumerated(value = EnumType.STRING)
     private Role auth;
 
     @Enumerated(value = EnumType.STRING)
     private MemberGrade memberGrade;
 
-    private int orderCount;
-
-    @Column(nullable = false)
-    private String address;
-
     @Builder
-    public Member(Long id, String email, String password, Role auth, MemberGrade memberGrade, int orderCount, String address) {
+    public Member(Long id, String email, String password, String address, int orderCount, Role auth, MemberGrade memberGrade) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.address = address;
+        this.orderCount = orderCount;
         this.auth = auth;
         this.memberGrade = memberGrade;
-        this.orderCount = orderCount;
-        this.address = address;
     }
 
     @Override

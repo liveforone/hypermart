@@ -50,8 +50,8 @@ public class OrdersService {
     public void saveSingleOrder(Item item, String email, OrdersRequest ordersRequest) {
         Member member = memberRepository.findByEmail(email);
         int orderQuantity = ordersRequest.getOrderQuantity();
-        int totalPrice;
 
+        int totalPrice;
         if (OrderClock.isSpecialDiscountTime()) {
             totalPrice = DiscountPolicy.calculateSpecialDiscount(item, orderQuantity);
         } else {

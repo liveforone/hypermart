@@ -89,7 +89,6 @@ public class ItemController {
             Principal principal
     ) {
         Item item = itemService.getItemDetail(id);
-
         if (CommonUtils.isNull(item)) {
             return ResponseEntity.ok("존재하지 않는 상품입니다.");
         }
@@ -145,7 +144,6 @@ public class ItemController {
             Principal principal
     ) {
         Item item = itemService.getItemDetail(id);
-
         if (CommonUtils.isNull(item)) {
             return ResponseEntity.ok("존재하지 않는 상품입니다.");
         }
@@ -167,7 +165,6 @@ public class ItemController {
             Principal principal
     ) throws IOException {
         Item item = itemService.getItemDetail(id);
-
         if (CommonUtils.isNull(item)) {
             return ResponseEntity.ok("존재하지 않는 상품입니다.");
         }
@@ -197,7 +194,6 @@ public class ItemController {
             Principal principal
     ) {
         Item item = itemService.getItemDetail(id);
-
         if (CommonUtils.isNull(item)) {
             return ResponseEntity.ok("존재하지 않는 상품입니다.");
         }
@@ -220,7 +216,6 @@ public class ItemController {
             Principal principal
     ) {
         Item item = itemService.getItemDetail(id);
-
         if (CommonUtils.isNull(item)) {
             return ResponseEntity.ok("존재하지 않는 상품입니다.");
         }

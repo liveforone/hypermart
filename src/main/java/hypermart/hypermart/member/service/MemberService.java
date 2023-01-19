@@ -63,10 +63,8 @@ public class MemberService {
         String email = memberRequest.getEmail();
         String password = memberRequest.getPassword();
 
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                email,
-                password
-        );
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(email, password);
         Authentication authentication = authenticationManagerBuilder
                 .getObject()
                 .authenticate(authenticationToken);
@@ -93,7 +91,6 @@ public class MemberService {
     @Transactional
     public void updatePassword(Long id, String inputPassword) {
         String newPassword = MemberPassword.encodePassword(inputPassword);
-
         memberRepository.updatePassword(id, newPassword);
     }
 

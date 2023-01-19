@@ -15,8 +15,8 @@ public class MemberResponse {
 
     private Long id;
     private String email;
+    private String address;
+    private int orderCount;
     private Role auth;
     private MemberGrade memberGrade;
-    private int orderCount;
-    private String address;
 }

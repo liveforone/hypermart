@@ -12,8 +12,8 @@ public class MemberRequest {
     private Long id;
     private String email;
     private String password;
+    private String address;
+    private int orderCount;
     private Role auth;
     private MemberGrade memberGrade;
-    private int orderCount;
-    private String address;
 }

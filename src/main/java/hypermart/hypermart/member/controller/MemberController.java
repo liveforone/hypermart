@@ -12,7 +12,6 @@ import hypermart.hypermart.member.util.MemberEmail;
 import hypermart.hypermart.member.util.MemberMapper;
 import hypermart.hypermart.member.util.MemberPassword;
 import hypermart.hypermart.utility.CommonUtils;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -94,18 +93,16 @@ public class MemberController {
         return ResponseEntity.ok("주소 등록 페이지");
     }
 
-    @PostMapping("/member/regi-address")
-    public ResponseEntity<?> regiAddress(
+    @PutMapping("/member/regi-address")
+    public ResponseEntity<?> updateAddress(
             @RequestBody String address,
-            Principal principal,
-            HttpServletRequest request
+            Principal principal
     ) {
         String email = principal.getName();
-        memberService.regiAddress(address, email);
+        memberService.updateAddress(address, email);
         log.info("주소 등록 성공");
 
-        String url = "/member/my-page";
-        return CommonUtils.makeResponseEntityForRedirect(url, request);
+        return ResponseEntity.ok("주소 재등록에 성공하셨습니다.");
     }
 
     @GetMapping("/member/regi-seller")

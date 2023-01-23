@@ -21,8 +21,8 @@ public class UploadFileRepositoryImpl implements UploadFileRepositoryCustom {
         QItem qitem = QItem.item;
 
         return queryFactory.selectFrom(uploadFile)
-                .join(uploadFile.item, qitem)
-                .on(qitem.eq(item))
+                .join(uploadFile.item, qitem).fetchJoin()
+                .where(qitem.eq(item))
                 .orderBy(uploadFile.id.asc())
                 .fetch();
     }

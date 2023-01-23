@@ -157,7 +157,7 @@ public class ItemController {
         return ResponseEntity.ok(ItemMapper.entityToDtoDetail(item));
     }
 
-    @PutMapping("/item/edit/{id}")
+    @PatchMapping("/item/edit/{id}")
     public ResponseEntity<?> editItem(
             @PathVariable("id") Long id,
             @RequestPart String content,
@@ -187,7 +187,7 @@ public class ItemController {
         return ResponseEntity.ok("상품을 성공적으로 수정하였습니다.");
     }
 
-    @PutMapping("/item/update-remaining/{id}")
+    @PatchMapping("/item/update-remaining/{id}")
     public ResponseEntity<?> restockItem(
             @PathVariable("id") Long id,
             @RequestBody int remaining,

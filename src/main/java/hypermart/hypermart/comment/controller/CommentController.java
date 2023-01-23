@@ -93,7 +93,7 @@ public class CommentController {
         return CommonUtils.makeResponseEntityForRedirect(url, request);
     }
 
-    @PutMapping("/comment/edit/{commentId}")
+    @PatchMapping("/comment/edit/{commentId}")
     public ResponseEntity<?> editComment(
             @PathVariable("commentId") Long commentId,
             @RequestBody String content,

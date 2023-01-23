@@ -93,7 +93,7 @@ public class MemberController {
         return ResponseEntity.ok("주소 등록 페이지");
     }
 
-    @PutMapping("/member/regi-address")
+    @PatchMapping("/member/regi-address")
     public ResponseEntity<?> updateAddress(
             @RequestBody String address,
             Principal principal
@@ -110,7 +110,7 @@ public class MemberController {
         return ResponseEntity.ok("판매자 등록 페이지");
     }
 
-    @PutMapping("/member/regi-seller")
+    @PatchMapping("/member/regi-seller")
     public ResponseEntity<?> regiSeller(Principal principal) {
         String email = principal.getName();
         memberService.regiSeller(email);
@@ -119,7 +119,7 @@ public class MemberController {
         return ResponseEntity.ok("판매자 등록에 성공했습니다.");
     }
 
-    @PutMapping("/member/change-email")
+    @PatchMapping("/member/change-email")
     public ResponseEntity<?> changeEmail(
             @RequestBody ChangeEmailRequest changeEmailRequest,
             Principal principal
@@ -149,7 +149,7 @@ public class MemberController {
         return ResponseEntity.ok("이메일이 변경되었습니다.");
     }
 
-    @PutMapping("/member/change-password")
+    @PatchMapping("/member/change-password")
     public ResponseEntity<?> changePassword(
             @RequestBody ChangePasswordRequest changePasswordRequest,
             Principal principal

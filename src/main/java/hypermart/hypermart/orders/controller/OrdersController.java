@@ -115,7 +115,7 @@ public class OrdersController {
         return CommonUtils.makeResponseEntityForRedirect(url, request);
     }
 
-    @PutMapping("/order/cancel/{id}")
+    @PatchMapping("/order/cancel/{id}")
     public ResponseEntity<?> cancelOrder(
             @PathVariable("id") Long id,
             Principal principal

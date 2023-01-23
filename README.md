@@ -6,6 +6,7 @@
 * Java17
 * Spring Data Jpa & MySql
 * Spring Security & Jwt
+* Query Dsl(jpql에서 마이그레이션)
 * LomBok
 * Gradle
 * Junit5

@@ -75,3 +75,6 @@
 * [중복체크는 어떻게 해야할까?](https://github.com/liveforone/hypermart/wiki/%EC%A4%91%EB%B3%B5%EC%B2%B4%ED%81%AC%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 * [작성자 판별은 어디서 해야할까?](https://github.com/liveforone/hypermart/wiki/%EC%9E%91%EC%84%B1%EC%9E%90-%ED%8C%90%EB%B3%84%EC%9D%80-%EC%96%B4%EB%94%94%EC%84%9C-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%3F)
 * [하루중 원하는 시간은 어떻게 구할까?](https://github.com/liveforone/hypermart/wiki/%ED%95%98%EB%A3%A8%EC%A4%91-%EC%9B%90%ED%95%98%EB%8A%94-%EC%8B%9C%EA%B0%84%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B5%AC%ED%95%A0%EA%B9%8C%3F)
+
+# 7. 릴리즈 노트
+* [추가] Jpql 기반의 쿼리에서 Query Dsl로 전부 마이그레이션

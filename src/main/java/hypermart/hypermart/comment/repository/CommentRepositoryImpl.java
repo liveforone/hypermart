@@ -46,9 +46,9 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
                 .join(comment.item)
                 .join(comment.writer)
                 .where(comment.item.eq(item))
+                .orderBy(comment.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(comment.id.desc())
                 .fetch();
 
         return new PageImpl<>(content, pageable, content.size());

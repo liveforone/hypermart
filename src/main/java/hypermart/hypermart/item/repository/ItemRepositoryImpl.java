@@ -22,9 +22,9 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
 
         List<Item> content = queryFactory.selectFrom(item)
                 .join(item.writer)
+                .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(item.id.desc())
                 .fetch();
 
         return new PageImpl<>(content, pageable, content.size());
@@ -36,9 +36,9 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
         List<Item> content = queryFactory.selectFrom(item)
                 .join(item.writer)
                 .where(item.title.contains(title))
+                .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(item.id.desc())
                 .fetch();
 
         return new PageImpl<>(content, pageable, content.size());
@@ -50,9 +50,9 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
         List<Item> content = queryFactory.selectFrom(item)
                 .join(item.writer)
                 .where(item.category.contains(category))
+                .orderBy(item.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(item.id.desc())
                 .fetch();
 
         return new PageImpl<>(content, pageable, content.size());

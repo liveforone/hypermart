@@ -38,9 +38,9 @@ public class OrdersRepositoryImpl implements OrdersRepositoryCustom{
                 .join(orders.item)
                 .join(orders.member, member)
                 .where(member.email.eq(email))
+                .orderBy(orders.id.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
-                .orderBy(orders.id.desc())
                 .fetch();
 
         return new PageImpl<>(content, pageable, content.size());
@@ -52,7 +52,11 @@ public class OrdersRepositoryImpl implements OrdersRepositoryCustom{
         return queryFactory.selectFrom(orders)
                 .join(orders.member).fetchJoin()
                 .join(orders.item).fetchJoin()
-                .where(orders.orderState.eq(orderState).and(orders.member.eq(member)).and(orders.item.eq(item)))
+                .where(
+                        orders.orderState.eq(orderState),
+                        orders.member.eq(member),
+                        orders.item.eq(item)
+                )
                 .fetch();
     }
 

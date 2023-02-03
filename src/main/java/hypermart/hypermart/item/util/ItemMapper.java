@@ -1,8 +1,10 @@
 package hypermart.hypermart.item.util;
 
+import hypermart.hypermart.item.dto.ItemDetailResponse;
 import hypermart.hypermart.item.dto.ItemRequest;
 import hypermart.hypermart.item.dto.ItemResponse;
 import hypermart.hypermart.item.model.Item;
+import hypermart.hypermart.uploadFile.dto.UploadFileResponse;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -49,5 +51,17 @@ public class ItemMapper {
 
     public static ItemResponse entityToDtoDetail(Item item) {
         return ItemMapper.dtoBuilder(item);
+    }
+
+    public static ItemDetailResponse createItemDetailResponse(
+            String user,
+            Item item,
+            List<UploadFileResponse> files
+    ) {
+        return ItemDetailResponse.builder()
+                .user(user)
+                .item(ItemMapper.entityToDtoDetail(item))
+                .files(files)
+                .build();
     }
 }

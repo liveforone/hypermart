@@ -2,6 +2,7 @@ package hypermart.hypermart.item.controller;
 
 import hypermart.hypermart.basket.service.BasketService;
 import hypermart.hypermart.comment.service.CommentService;
+import hypermart.hypermart.item.dto.ItemDetailResponse;
 import hypermart.hypermart.item.dto.ItemRequest;
 import hypermart.hypermart.item.dto.ItemResponse;
 import hypermart.hypermart.item.model.Item;
@@ -95,12 +96,10 @@ public class ItemController {
 
         String email = principal.getName();
         List<UploadFileResponse> files = uploadFileService.getFiles(item);
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("user", email);
-        hashMap.put("item", ItemMapper.entityToDtoDetail(item));
-        hashMap.put("files", files);
+        ItemDetailResponse itemDetailResponse =
+                ItemMapper.createItemDetailResponse(email, item, files);
 
-        return ResponseEntity.ok(hashMap);
+        return ResponseEntity.ok(itemDetailResponse);
     }
 
     @GetMapping("/seller-page")

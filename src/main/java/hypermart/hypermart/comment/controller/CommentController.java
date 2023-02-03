@@ -2,8 +2,10 @@ package hypermart.hypermart.comment.controller;
 
 import hypermart.hypermart.comment.dto.CommentRequest;
 import hypermart.hypermart.comment.dto.CommentResponse;
+import hypermart.hypermart.comment.dto.CommentsPageResponse;
 import hypermart.hypermart.comment.model.Comment;
 import hypermart.hypermart.comment.service.CommentService;
+import hypermart.hypermart.comment.util.CommentMapper;
 import hypermart.hypermart.comment.util.CommentUtils;
 import hypermart.hypermart.item.model.Item;
 import hypermart.hypermart.item.service.ItemService;
@@ -54,12 +56,10 @@ public class CommentController {
 
         Page<CommentResponse> comments = commentService.getCommentsByItem(item, pageable);
         String email = principal.getName();
+        CommentsPageResponse commentsPageResponse =
+                CommentMapper.createCommentsPageResponse(comments, email);
 
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("user", email);
-        hashMap.put("comments", comments);
-
-        return ResponseEntity.ok(hashMap);
+        return ResponseEntity.ok(commentsPageResponse);
     }
 
     @PostMapping("/comment/post/{itemId}")

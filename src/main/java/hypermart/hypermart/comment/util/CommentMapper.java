@@ -2,6 +2,7 @@ package hypermart.hypermart.comment.util;
 
 import hypermart.hypermart.comment.dto.CommentRequest;
 import hypermart.hypermart.comment.dto.CommentResponse;
+import hypermart.hypermart.comment.dto.CommentsPageResponse;
 import hypermart.hypermart.comment.model.Comment;
 import org.springframework.data.domain.Page;
 
@@ -31,5 +32,15 @@ public class CommentMapper {
 
     public static CommentResponse entityToDtoDetail(Comment comment) {
         return CommentMapper.dtoBuilder(comment);
+    }
+
+    public static CommentsPageResponse createCommentsPageResponse(
+            Page<CommentResponse> comments,
+            String user
+    ) {
+        return CommentsPageResponse.builder()
+                .comments(comments)
+                .user(user)
+                .build();
     }
 }
